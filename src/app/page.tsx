@@ -4,7 +4,6 @@ import { SongsSection } from "@/components/SongsSection";
 import { FloorPlan } from "@/components/FloorPlan";
 import { Countdown } from "@/components/Countdown";
 import { RsvpSection } from "@/components/RsvpSection";
-import { BotanicalDecor } from "@/components/BotanicalDecor";
 
 export const revalidate = 0;
 
@@ -52,23 +51,15 @@ export default async function HomePage() {
       {/* ───── HERO ───── */}
       <section
         id="domov"
-        className="min-h-screen flex flex-col items-center justify-center px-4 py-20 bg-[#1a1917] relative overflow-hidden"
+        className="min-h-screen flex flex-col items-center justify-center px-4 py-24 bg-warm-900 relative overflow-hidden"
       >
-        <BotanicalDecor />
-        <BotanicalDecor flip />
-        {/* Bottom botanicals */}
-        <BotanicalDecor position="bottom" />
-        <BotanicalDecor position="bottom" flip />
-        {/* Subtle warm radial wash */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#2a2520] opacity-40 blur-[180px] pointer-events-none" />
-        {/* Subtle grain overlay */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-noise" />
-        {/* Thin decorative ring behind content */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] rounded-full border border-white/[0.02] pointer-events-none" />
-        <div className="relative text-center space-y-8 animate-fade-in max-w-2xl mx-auto">
+        {/* Subtle vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
+
+        <div className="relative text-center space-y-10 animate-fade-in max-w-2xl mx-auto">
           {/* Photo */}
           <div className="animate-fade-in-delay-1">
-            <div className="w-80 h-72 sm:w-[28rem] sm:h-[22rem] mx-auto rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.4)] ring-1 ring-white/[0.06]">
+            <div className="w-72 h-64 sm:w-[26rem] sm:h-[21rem] mx-auto rounded-xl overflow-hidden shadow-2xl">
               <img
                 src={heroImage}
                 alt="Sara & Bor"
@@ -78,32 +69,32 @@ export default async function HomePage() {
           </div>
 
           {/* Names */}
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl text-cream-50 tracking-wide animate-fade-in-delay-1">
-            Sara & Bor
-          </h1>
-
-          {/* Ornamental divider */}
-          <div className="flex items-center justify-center gap-4 animate-fade-in-delay-2">
-            <div className="w-12 sm:w-20 h-px bg-gradient-to-r from-transparent to-gold-400/60" />
-            <span className="text-gold-400/80 text-sm">&#9829;</span>
-            <div className="w-12 sm:w-20 h-px bg-gradient-to-l from-transparent to-gold-400/60" />
+          <div className="space-y-4 animate-fade-in-delay-1">
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl text-white/95 tracking-wide">
+              Sara & Bor
+            </h1>
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-12 sm:w-20 h-px bg-gradient-to-r from-transparent to-gold-400/60" />
+              <span className="text-gold-400/80 text-sm animate-heartbeat">&#9829;</span>
+              <div className="w-12 sm:w-20 h-px bg-gradient-to-l from-transparent to-gold-400/60" />
+            </div>
           </div>
 
           {/* Date */}
-          <p className="font-serif text-xl sm:text-2xl text-cream-300/70 tracking-wide animate-fade-in-delay-2">
+          <p className="font-serif text-xl sm:text-2xl text-white/50 tracking-wider animate-fade-in-delay-2">
             5. junij 2026
           </p>
 
           {/* Countdown */}
-          <div className="animate-fade-in-delay-3">
+          <div className="animate-fade-in-delay-2">
             <Countdown />
           </div>
 
           {/* Scroll hint */}
-          <div className="pt-10 animate-fade-in-delay-3">
+          <div className="pt-8 animate-fade-in-delay-3">
             <a
               href="#informacije"
-              className="inline-block text-gold-400/40 hover:text-gold-400/70 transition-colors"
+              className="inline-block text-white/20 hover:text-white/40 transition-colors"
             >
               <svg
                 className="w-5 h-5 mx-auto animate-bounce"
@@ -114,62 +105,58 @@ export default async function HomePage() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={1}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  strokeWidth={1.5}
+                  d="M19 9l-7 7-7-7"
                 />
               </svg>
             </a>
           </div>
         </div>
+
+        {/* Smooth transition to light */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-warm-50 to-transparent pointer-events-none" />
       </section>
 
       {/* ───── INFORMACIJE ───── */}
       {sectionEnabled("info") && (
-      <section id="informacije" className="py-20 sm:py-28 bg-white relative">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <p className="text-gold-400/70 text-xs tracking-[0.4em] uppercase mb-3">Informacije</p>
-            <h2 className="font-serif text-4xl sm:text-5xl text-sage-700 mb-5">
-              {sectionName("info", "Podrobnosti")}
-            </h2>
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-8 h-px bg-gold-300/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-gold-300/60" />
-              <div className="w-8 h-px bg-gold-300/50" />
-            </div>
-          </div>
+      <section id="informacije" className="py-24 sm:py-32 bg-warm-50">
+        <div className="max-w-xl mx-auto px-6">
+          <SectionHeader
+            label="Informacije"
+            title={sectionName("info", "Podrobnosti")}
+          />
 
-          <div className="space-y-14">
+          <div className="space-y-16">
             {sectionEnabled("block_when") && (
-            <InfoBlock title={c("block_when_title", "Kdaj")} icon="&#128197;">
-              <p className="text-lg font-serif text-sage-600">
+            <InfoBlock label={c("block_when_title", "Kdaj")}>
+              <p className="text-lg font-serif text-warm-800">
                 {c("date_time", "[DATUM IN URA]")}
               </p>
             </InfoBlock>
             )}
 
             {sectionEnabled("block_where") && (
-            <InfoBlock title={c("block_where_title", "Kje")} icon="&#128205;">
-              <p className="text-lg font-serif text-sage-600">
+            <InfoBlock label={c("block_where_title", "Kje")}>
+              <p className="text-lg font-serif text-warm-800">
                 {c("venue_name", "[IME LOKACIJE]")}
               </p>
-              <p className="text-gray-500 mt-1">
+              <p className="text-warm-600 mt-1">
                 {c("venue_address", "[NASLOV LOKACIJE]")}
               </p>
             </InfoBlock>
             )}
 
             {sectionEnabled("block_directions") && (
-            <InfoBlock title={c("block_directions_title", "Kako do tja")} icon="&#128663;">
-              <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+            <InfoBlock label={c("block_directions_title", "Kako do tja")}>
+              <p className="text-warm-600 leading-relaxed whitespace-pre-line">
                 {c("directions", "[NAVODILA / ZEMLJEVID]")}
               </p>
             </InfoBlock>
             )}
 
             {sectionEnabled("block_schedule") && (
-            <InfoBlock title={c("block_schedule_title", "Program")} icon="&#9202;">
-              <div className="space-y-4">
+            <InfoBlock label={c("block_schedule_title", "Program")}>
+              <div className="space-y-3">
                 <TimelineItem time={c("schedule_ceremony", "[URA]")} event="Obred" />
                 <TimelineItem time={c("schedule_aperitif", "[URA]")} event="Aperitiv" />
                 <TimelineItem time={c("schedule_dinner", "[URA]")} event="Večerja" />
@@ -179,16 +166,16 @@ export default async function HomePage() {
             )}
 
             {sectionEnabled("block_dresscode") && (
-            <InfoBlock title={c("block_dresscode_title", "Oblačilni kod")} icon="&#128087;">
-              <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+            <InfoBlock label={c("block_dresscode_title", "Oblačilni kod")}>
+              <p className="text-warm-600 leading-relaxed whitespace-pre-line">
                 {c("dress_code", "[OBLAČILNI KOD]")}
               </p>
             </InfoBlock>
             )}
 
             {sectionEnabled("block_accommodation") && (
-            <InfoBlock title={c("block_accommodation_title", "Namestitev")} icon="&#127976;">
-              <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+            <InfoBlock label={c("block_accommodation_title", "Namestitev")}>
+              <p className="text-warm-600 leading-relaxed whitespace-pre-line">
                 {c("accommodation", "[PREDLOGI ZA NAMESTITEV]")}
               </p>
             </InfoBlock>
@@ -200,23 +187,13 @@ export default async function HomePage() {
 
       {/* ───── GLASBA ───── */}
       {sectionEnabled("songs") && (
-      <section id="glasba" className="py-20 sm:py-28 bg-sage-50/40">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <p className="text-gold-400/70 text-xs tracking-[0.4em] uppercase mb-3">Glasba</p>
-            <h2 className="font-serif text-4xl sm:text-5xl text-sage-700 mb-4">
-              {sectionName("songs", "Predlagajte pesem")}
-            </h2>
-            <p className="text-gray-500">
-              Pomagajte nam sestaviti popoln seznam pesmi za zabavo!
-            </p>
-            <div className="flex items-center justify-center gap-3 mt-5">
-              <div className="w-8 h-px bg-gold-300/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-gold-300/60" />
-              <div className="w-8 h-px bg-gold-300/50" />
-            </div>
-          </div>
-
+      <section id="glasba" className="py-24 sm:py-32 bg-warm-100">
+        <div className="max-w-2xl mx-auto px-6">
+          <SectionHeader
+            label="Glasba"
+            title={sectionName("songs", "Predlagajte pesem")}
+            subtitle="Pomagajte nam sestaviti popoln seznam pesmi za zabavo!"
+          />
           <SongsSection initialSongs={songs} />
         </div>
       </section>
@@ -224,41 +201,32 @@ export default async function HomePage() {
 
       {/* ───── SEDEŽNI RED ───── */}
       {sectionEnabled("seating") && (
-      <section id="sedezni-red" className="py-20 sm:py-28 bg-white">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <p className="text-gold-400/70 text-xs tracking-[0.4em] uppercase mb-3">Razporeditev</p>
-            <h2 className="font-serif text-4xl sm:text-5xl text-sage-700 mb-4">
-              {sectionName("seating", "Sedežni red")}
-            </h2>
-            <p className="text-gray-500">
-              Poiščite svojo mizo za slavje
-            </p>
-            <div className="flex items-center justify-center gap-3 mt-5">
-              <div className="w-8 h-px bg-gold-300/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-gold-300/60" />
-              <div className="w-8 h-px bg-gold-300/50" />
-            </div>
-          </div>
+      <section id="sedezni-red" className="py-24 sm:py-32 bg-warm-50">
+        <div className="max-w-5xl mx-auto px-6">
+          <SectionHeader
+            label="Razporeditev"
+            title={sectionName("seating", "Sedežni red")}
+            subtitle="Poiščite svojo mizo za slavje"
+          />
 
           <FloorPlan tables={tablesWithGuests} mode="view" />
 
           {tablesWithGuests.length > 0 && (
-            <div className="mt-12 space-y-4 sm:hidden">
-              <h3 className="font-serif text-xl text-sage-600">Vse mize</h3>
+            <div className="mt-12 space-y-3 sm:hidden">
+              <h3 className="font-serif text-lg text-warm-700">Vse mize</h3>
               {tablesWithGuests.map((table) => (
                 <div
                   key={table.id}
-                  className="p-4 bg-cream-50 rounded-lg border border-cream-200"
+                  className="p-4 bg-white rounded-lg border border-warm-200"
                 >
-                  <p className="font-serif text-sage-700 font-medium">
+                  <p className="font-serif text-warm-800 font-medium">
                     {table.name}
                   </p>
-                  <div className="mt-2 flex flex-wrap gap-2">
+                  <div className="mt-2 flex flex-wrap gap-1.5">
                     {table.guests.map((guest) => (
                       <span
                         key={guest.id}
-                        className="text-xs px-2 py-1 bg-cream-100 rounded-full text-gray-600"
+                        className="text-xs px-2.5 py-1 bg-warm-100 rounded-full text-warm-600"
                       >
                         {guest.name}
                       </span>
@@ -274,28 +242,18 @@ export default async function HomePage() {
 
       {/* ───── POTRDITEV (RSVP) ───── */}
       {sectionEnabled("rsvp") && (
-      <section id="potrditev" className="py-20 sm:py-28 bg-[#1a1917] relative overflow-hidden">
-        <BotanicalDecor />
-        <BotanicalDecor flip />
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-noise" />
-        <div className="relative max-w-2xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-8 h-px bg-gold-400/30" />
-              <span className="text-gold-400/50 text-sm">&#9829;</span>
-              <div className="w-8 h-px bg-gold-400/30" />
-            </div>
-            <h2 className="font-serif text-4xl sm:text-5xl text-cream-100/90 mb-3 italic">
+      <section id="potrditev" className="py-24 sm:py-32 bg-warm-100 relative">
+        <div className="max-w-xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p className="text-gold-400 text-xs tracking-[0.35em] uppercase mb-4">Potrditev</p>
+            <h2 className="font-serif text-4xl sm:text-5xl text-warm-800 mb-3">
               Bodi z nama
             </h2>
-            <p className="text-cream-300/50 uppercase tracking-[0.25em] text-xs sm:text-sm mb-2">
-              Potrdi svojo udeležbo
+            <p className="text-warm-500 text-sm">
+              Potrdi svojo udeležbo do 1. maja 2026
             </p>
-            <p className="text-cream-300/25 text-xs tracking-[0.3em]">
-              5 &middot; JUNIJ &middot; 2026
-            </p>
+            <div className="w-10 h-px bg-gold-300/60 mx-auto mt-6" />
           </div>
-
           <RsvpSection />
         </div>
       </section>
@@ -304,24 +262,42 @@ export default async function HomePage() {
   );
 }
 
-function InfoBlock({
+/* ── Shared components ── */
+
+function SectionHeader({
+  label,
   title,
-  icon,
+  subtitle,
+}: {
+  label: string;
+  title: string;
+  subtitle?: string;
+}) {
+  return (
+    <div className="text-center mb-16">
+      <p className="text-gold-400 text-xs tracking-[0.35em] uppercase mb-4">{label}</p>
+      <h2 className="font-serif text-4xl sm:text-5xl text-warm-800 mb-3">
+        {title}
+      </h2>
+      {subtitle && (
+        <p className="text-warm-500 text-sm">{subtitle}</p>
+      )}
+      <div className="w-10 h-px bg-gold-300/60 mx-auto mt-6" />
+    </div>
+  );
+}
+
+function InfoBlock({
+  label,
   children,
 }: {
-  title: string;
-  icon: string;
+  label: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-l-2 border-gold-200/60 pl-6">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="text-xl opacity-70" role="img">
-          {icon}
-        </span>
-        <h3 className="font-serif text-xl text-sage-700 tracking-wide">{title}</h3>
-      </div>
-      <div className="pl-8">{children}</div>
+    <div>
+      <p className="text-gold-500 text-xs tracking-[0.25em] uppercase mb-3">{label}</p>
+      <div>{children}</div>
     </div>
   );
 }
@@ -329,11 +305,9 @@ function InfoBlock({
 function TimelineItem({ time, event }: { time: string; event: string }) {
   return (
     <div className="flex items-center gap-4">
-      <div className="w-1.5 h-1.5 rounded-full bg-gold-300/70 shrink-0" />
-      <div>
-        <span className="text-sm text-gold-500/80 font-medium tabular-nums">{time}</span>
-        <span className="text-gray-500 ml-3">{event}</span>
-      </div>
+      <span className="text-sm text-gold-500 font-medium tabular-nums w-14">{time}</span>
+      <div className="w-1 h-1 rounded-full bg-warm-300" />
+      <span className="text-warm-700">{event}</span>
     </div>
   );
 }

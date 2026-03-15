@@ -56,20 +56,20 @@ export function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-500 ${
         isOnHero
-          ? "bg-transparent border-b border-transparent"
-          : "bg-cream-50/90 backdrop-blur-md border-b border-cream-200"
+          ? "bg-warm-900/80 backdrop-blur-md border-b border-white/5"
+          : "bg-warm-50/90 backdrop-blur-md border-b border-warm-200"
       }`}
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="flex items-center justify-between h-14">
           <a
             href={SECTIONS.HERO}
-            className={`font-serif text-xl transition-colors ${
+            className={`font-serif text-lg transition-colors duration-500 ${
               isOnHero
-                ? "text-cream-100 hover:text-cream-50"
-                : "text-sage-700 hover:text-sage-500"
+                ? "text-white/90 hover:text-white"
+                : "text-warm-800 hover:text-warm-600"
             }`}
           >
             S & B
@@ -81,14 +81,14 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`text-sm tracking-wide transition-colors ${
+                className={`text-xs tracking-widest uppercase transition-colors duration-500 ${
                   activeSection === link.href
                     ? isOnHero
-                      ? "text-cream-50 font-medium"
-                      : "text-sage-700 font-medium"
+                      ? "text-white font-medium"
+                      : "text-warm-800 font-medium"
                     : isOnHero
-                      ? "text-cream-200/70 hover:text-cream-50"
-                      : "text-gray-500 hover:text-sage-600"
+                      ? "text-white/50 hover:text-white/80"
+                      : "text-warm-500 hover:text-warm-700"
                 }`}
               >
                 {link.label}
@@ -99,15 +99,15 @@ export function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`sm:hidden p-2 transition-colors ${
+            className={`sm:hidden p-2 transition-colors duration-500 ${
               isOnHero
-                ? "text-cream-200 hover:text-cream-50"
-                : "text-gray-500 hover:text-sage-600"
+                ? "text-white/70 hover:text-white"
+                : "text-warm-500 hover:text-warm-700"
             }`}
             aria-label="Odpri meni"
           >
             <svg
-              className="w-6 h-6"
+              className="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -134,10 +134,8 @@ export function Navbar() {
         {/* Mobile menu */}
         {isOpen && (
           <div
-            className={`sm:hidden pb-4 pt-2 ${
-              isOnHero
-                ? "border-t border-[#333]"
-                : "border-t border-cream-200"
+            className={`sm:hidden pb-4 pt-2 border-t ${
+              isOnHero ? "border-white/10" : "border-warm-200"
             }`}
           >
             {NAV_LINKS.map((link) => (
@@ -145,14 +143,14 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`block py-2 text-sm tracking-wide transition-colors ${
+                className={`block py-2 text-xs tracking-widest uppercase transition-colors ${
                   activeSection === link.href
                     ? isOnHero
-                      ? "text-cream-50 font-medium"
-                      : "text-sage-700 font-medium"
+                      ? "text-white font-medium"
+                      : "text-warm-800 font-medium"
                     : isOnHero
-                      ? "text-cream-200/70 hover:text-cream-50"
-                      : "text-gray-500 hover:text-sage-600"
+                      ? "text-white/50 hover:text-white/80"
+                      : "text-warm-500 hover:text-warm-700"
                 }`}
               >
                 {link.label}
@@ -163,8 +161,8 @@ export function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`block py-2 text-xs transition-colors mt-2 pt-3 ${
                 isOnHero
-                  ? "text-[#555] hover:text-[#888] border-t border-[#333]"
-                  : "text-gray-400 hover:text-gray-500 border-t border-cream-200"
+                  ? "text-white/20 hover:text-white/40 border-t border-white/10"
+                  : "text-warm-400 hover:text-warm-500 border-t border-warm-200"
               }`}
             >
               Admin

@@ -36,7 +36,7 @@ export function Countdown() {
   }, []);
 
   if (!mounted) {
-    return <div className="flex justify-center gap-6 sm:gap-8">&nbsp;</div>;
+    return <div className="flex justify-center gap-8">&nbsp;</div>;
   }
 
   const blocks = [
@@ -47,19 +47,19 @@ export function Countdown() {
   ];
 
   return (
-    <div className="flex justify-center items-center gap-5 sm:gap-7">
+    <div className="flex justify-center items-center gap-6 sm:gap-8">
       {blocks.map((block, i) => (
-        <div key={block.label} className="flex items-center gap-5 sm:gap-7">
+        <div key={block.label} className="flex items-center gap-6 sm:gap-8">
           <div className="text-center min-w-[3rem]">
-            <span className="block font-serif text-3xl sm:text-4xl text-cream-50/90 tabular-nums">
+            <span className="block font-serif text-3xl sm:text-4xl text-white/90 tabular-nums">
               {String(block.value).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs text-cream-300/40 uppercase tracking-[0.25em]">
+            <span className="text-[10px] text-white/30 uppercase tracking-[0.25em]">
               {block.label}
             </span>
           </div>
           {i < blocks.length - 1 && (
-            <span className="text-cream-300/20 text-lg font-light select-none">:</span>
+            <span className="text-white/15 text-lg font-light select-none">:</span>
           )}
         </div>
       ))}

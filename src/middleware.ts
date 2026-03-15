@@ -20,6 +20,24 @@ export async function middleware(request: NextRequest) {
 
   // Check guest gate
   const guestCookie = request.cookies.get(COOKIE_NAME);
+
+  // Auto-unlock via ?pw= query param
+  const pw = request.nextUrl.searchParams.get("pw");
+  if (pw && pw === process.env.GUEST_PASSWORD) {
+    // Strip the pw param from URL so it doesn't linger
+    const cleanUrl = new URL(request.url);
+    cleanUrl.searchParams.delete("pw");
+    const response = NextResponse.redirect(cleanUrl);
+    response.cookies.set(COOKIE_NAME, "true", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 90, // 90 days
+    });
+    return response;
+  }
+
   if (guestCookie?.value !== "true") {
     return NextResponse.redirect(new URL(ROUTES.GATE, request.url));
   }

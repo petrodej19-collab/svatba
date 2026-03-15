@@ -24,18 +24,18 @@ export function SongsSection({
   }, []);
 
   return (
-    <div className="grid gap-12 md:grid-cols-2 md:gap-8">
+    <div className="grid gap-12 md:grid-cols-2 md:gap-10">
       <div>
-        <h3 className="font-serif text-xl text-sage-600 mb-4">
-          Dodajte pesem
+        <h3 className="text-xs text-warm-500 uppercase tracking-widest mb-5">
+          Dodaj pesem
         </h3>
         <SongForm onSubmitted={refreshSongs} />
       </div>
 
       <div>
-        <h3 className="font-serif text-xl text-sage-600 mb-4">
-          Predlagane pesmi
-          <span className="text-sm text-gray-400 font-sans ml-2">
+        <h3 className="text-xs text-warm-500 uppercase tracking-widest mb-5">
+          Seznam pesmi
+          <span className="text-warm-400 ml-2">
             ({songs.length})
           </span>
         </h3>

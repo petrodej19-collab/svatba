@@ -43,9 +43,9 @@ export function GuestPasswordForm() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Vnesite geslo"
           required
-          className="w-full px-4 py-3 text-center bg-white/80 border border-cream-300 rounded-lg
-                     text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2
-                     focus:ring-sage-300 focus:border-sage-300 transition-all font-sans"
+          className="w-full px-4 py-3 text-center bg-white border border-warm-300 rounded-lg
+                     text-warm-800 placeholder-warm-400 focus:outline-none focus:ring-2
+                     focus:ring-sage-300/50 focus:border-sage-300 transition-all font-sans"
         />
       </div>
       {error && (
@@ -56,8 +56,8 @@ export function GuestPasswordForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3 bg-sage-500 text-white rounded-lg font-sans text-sm
-                   tracking-wide hover:bg-sage-600 transition-colors disabled:opacity-50
+        className="w-full py-3 bg-warm-800 text-white rounded-lg font-sans text-sm
+                   tracking-wide hover:bg-warm-900 transition-colors disabled:opacity-50
                    disabled:cursor-not-allowed"
       >
         {loading ? "Vstopam..." : "Vstopite"}

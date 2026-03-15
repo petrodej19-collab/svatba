@@ -38,13 +38,13 @@ export default function RootLayout({
   return (
     <html lang="sl">
       <body
-        className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-cream-50 text-gray-800`}
+        className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-warm-50 text-warm-800`}
       >
         {isAuthenticated && <Navbar />}
         <main className="min-h-screen">{children}</main>
         {isAuthenticated && (
-          <footer className="py-8 text-center text-sm text-sage-400 border-t border-cream-200">
-            <p className="font-serif">Sara & Bor &middot; 2026</p>
+          <footer className="py-10 text-center border-t border-warm-200 bg-warm-50">
+            <p className="font-serif text-sm text-warm-400 tracking-wide">Sara & Bor &middot; 2026</p>
           </footer>
         )}
       </body>

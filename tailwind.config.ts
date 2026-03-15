@@ -9,37 +9,43 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: {
-          50: "#FFFDF7",
-          100: "#FFF9E8",
-          200: "#FFF3D1",
-          300: "#FFEBB3",
-          400: "#FFE299",
+        // Warm neutrals — the backbone of the palette
+        warm: {
+          50: "#FAFAF8",
+          100: "#F5F4F0",
+          200: "#EDEBE6",
+          300: "#E0DDD6",
+          400: "#C8C3BA",
+          500: "#A8A198",
+          600: "#8C8580",
+          700: "#6B6560",
+          800: "#3D3833",
+          900: "#1C1B18",
         },
-        sage: {
-          50: "#F4F7F4",
-          100: "#E3EBE3",
-          200: "#C7D7C7",
-          300: "#A3BFA3",
-          400: "#7FA37F",
-          500: "#5C875C",
-          600: "#4A6D4A",
-          700: "#3D5A3D",
-        },
+        // Refined gold/champagne accent
         gold: {
-          50: "#FBF8F0",
-          100: "#F5EDD8",
-          200: "#EBDBB1",
-          300: "#D4BC7A",
-          400: "#C4A74F",
-          500: "#B8963A",
+          50: "#FAF8F3",
+          100: "#F0EBE0",
+          200: "#E0D5C0",
+          300: "#C9B896",
+          400: "#B8A88A",
+          500: "#A6957A",
         },
+        // Muted sage — for buttons and subtle accents
+        sage: {
+          50: "#F4F6F4",
+          100: "#E5EBE5",
+          200: "#CCDBCC",
+          300: "#A8C0A8",
+          400: "#7FA37F",
+          500: "#5E7E5E",
+          600: "#4D674D",
+          700: "#3E5440",
+        },
+        // Soft rose for errors only
         rose: {
-          50: "#FDF6F6",
-          100: "#F9E8E8",
-          200: "#F2D0D0",
-          300: "#E5ABAB",
           400: "#D48A8A",
+          500: "#C47070",
         },
       },
       fontFamily: {

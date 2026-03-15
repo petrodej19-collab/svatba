@@ -23,27 +23,27 @@ export function TableCard({ table, isSelected, onClick, mode }: TableCardProps) 
         ${
           isSelected
             ? "border-sage-500 bg-sage-50 shadow-lg scale-105"
-            : "border-cream-300 bg-white hover:border-sage-300"
+            : "border-warm-300 bg-white hover:border-warm-400"
         }
       `}
     >
-      <p className="font-serif text-sm text-sage-700 font-medium mb-1">
+      <p className="font-serif text-sm text-warm-800 font-medium mb-1">
         {table.name}
       </p>
 
       <div className="text-center max-h-14 overflow-hidden">
         {table.guests.slice(0, 4).map((guest) => (
-          <p key={guest.id} className="text-xs text-gray-500 leading-tight truncate max-w-24">
+          <p key={guest.id} className="text-xs text-warm-600 leading-tight truncate max-w-24">
             {guest.name}
           </p>
         ))}
         {table.guests.length > 4 && (
-          <p className="text-xs text-gray-400">+{table.guests.length - 4} še</p>
+          <p className="text-xs text-warm-400">+{table.guests.length - 4} še</p>
         )}
       </div>
 
       {emptySeats > 0 && (
-        <p className="absolute -bottom-5 text-xs text-gray-400">
+        <p className="absolute -bottom-5 text-xs text-warm-400">
           še {emptySeats} {emptySeats === 1 ? "mesto" : emptySeats === 2 ? "mesti" : emptySeats <= 4 ? "mesta" : "mest"}
         </p>
       )}

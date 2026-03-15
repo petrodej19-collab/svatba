@@ -52,8 +52,8 @@ export function FloorPlan({
 
   if (tables.length === 0) {
     return (
-      <div className="flex items-center justify-center h-64 border-2 border-dashed border-cream-300 rounded-xl">
-        <p className="text-gray-400 italic">
+      <div className="flex items-center justify-center h-64 border-2 border-dashed border-warm-300 rounded-xl">
+        <p className="text-warm-400 italic">
           {mode === "edit"
             ? 'Kliknite "Dodaj mizo" za začetek'
             : "Sedežni red bo kmalu na voljo!"}
@@ -65,7 +65,7 @@ export function FloorPlan({
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-cream-100 rounded-xl border border-cream-300 overflow-hidden select-none"
+      className="relative w-full bg-warm-100 rounded-xl border border-warm-300 overflow-hidden select-none"
       style={{ paddingBottom: "66%" }}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
