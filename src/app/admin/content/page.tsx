@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/constants";
-import { SiteContent, Rsvp, WeddingTableWithGuests, Guest } from "@/types";
+import { SiteContent, Rsvp, WeddingTableWithGuests, Guest, Accommodation } from "@/types";
 import { FloorPlan } from "@/components/FloorPlan";
 
 interface ContentField {
@@ -39,6 +39,7 @@ const SECTIONS: SectionConfig[] = [
   { id: "glasba", defaultLabel: "Glasba", nameKey: "section_name_songs", enabledKey: "section_enabled_songs" },
   { id: "sedezni-red", defaultLabel: "Sedežni red", nameKey: "section_name_seating", enabledKey: "section_enabled_seating" },
   { id: "potrditev", defaultLabel: "Potrditev", nameKey: "section_name_rsvp", enabledKey: "section_enabled_rsvp" },
+  { id: "nastanitev", defaultLabel: "Nastanitev", nameKey: "section_name_accommodation", enabledKey: "section_enabled_accommodation" },
 ];
 
 interface InfoBlockConfig {
@@ -56,7 +57,7 @@ const INFO_BLOCKS: InfoBlockConfig[] = [
   { enabledKey: "section_enabled_block_accommodation", titleKey: "block_accommodation_title", defaultTitle: "Namestitev" },
 ];
 
-type Tab = "vsebina" | "rsvp" | "seating";
+type Tab = "vsebina" | "rsvp" | "seating" | "nastanitev";
 
 export default function AdminContentPage() {
   const [values, setValues] = useState<Record<string, string>>({});
@@ -72,6 +73,8 @@ export default function AdminContentPage() {
   const [selectedTableId, setSelectedTableId] = useState<string | null>(null);
   const [newGuestName, setNewGuestName] = useState("");
   const [seatingLoading, setSeatingLoading] = useState(false);
+  const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
+  const [accommodationLoading, setAccommodationLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const supabase = createClient();
@@ -121,10 +124,21 @@ export default function AdminContentPage() {
     setSeatingLoading(false);
   }, [supabase]);
 
+  const fetchAccommodations = useCallback(async () => {
+    setAccommodationLoading(true);
+    const { data } = await supabase
+      .from("accommodations")
+      .select("*")
+      .order("sort_order", { ascending: true });
+    setAccommodations((data as Accommodation[]) || []);
+    setAccommodationLoading(false);
+  }, [supabase]);
+
   useEffect(() => {
     if (tab === "rsvp") fetchRsvps();
     if (tab === "seating") fetchSeating();
-  }, [tab, fetchRsvps, fetchSeating]);
+    if (tab === "nastanitev") fetchAccommodations();
+  }, [tab, fetchRsvps, fetchSeating, fetchAccommodations]);
 
   const selectedTable = tables.find((t) => t.id === selectedTableId);
 
@@ -207,6 +221,32 @@ export default function AdminContentPage() {
         guests: t.guests.filter((g) => g.id !== guestId),
       }))
     );
+  }
+
+  async function addAccommodation() {
+    const { data } = await supabase
+      .from("accommodations")
+      .insert({
+        unit_name: `Nastanitev ${accommodations.length + 1}`,
+        guest_names: "",
+        sort_order: accommodations.length,
+      })
+      .select()
+      .single();
+    if (data) setAccommodations([...accommodations, data as Accommodation]);
+  }
+
+  async function updateAccommodation(id: string, field: string, value: string) {
+    await supabase.from("accommodations").update({ [field]: value }).eq("id", id);
+    setAccommodations(
+      accommodations.map((a) => (a.id === id ? { ...a, [field]: value } : a))
+    );
+  }
+
+  async function deleteAccommodation(id: string) {
+    if (!confirm("Ali želite izbrisati to nastanitev?")) return;
+    await supabase.from("accommodations").delete().eq("id", id);
+    setAccommodations(accommodations.filter((a) => a.id !== id));
   }
 
   function updateField(key: string, value: string) {
@@ -355,6 +395,16 @@ export default function AdminContentPage() {
           }`}
         >
           Sedežni red
+        </button>
+        <button
+          onClick={() => setTab("nastanitev")}
+          className={`px-4 py-2 text-sm transition-colors ${
+            tab === "nastanitev"
+              ? "font-medium text-sage-700 border-b-2 border-sage-500"
+              : "text-gray-400 hover:text-sage-600"
+          }`}
+        >
+          Nastanitev
         </button>
       </div>
 
@@ -618,6 +668,83 @@ export default function AdminContentPage() {
             </div>
           </div>
         )
+      )}
+
+      {tab === "nastanitev" && (
+        <div className="bg-white rounded-xl border border-cream-200 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="font-serif text-xl text-sage-700">Nastanitve</h2>
+              <p className="text-sm text-gray-500 mt-1">
+                Določite kdo bo spal kje. Gostje bodo videli ta razdelek ko ga vklopite v zavihku &ldquo;Vsebina&rdquo;.
+              </p>
+            </div>
+            <button
+              onClick={addAccommodation}
+              className="px-4 py-2 bg-sage-500 text-white rounded-lg text-sm hover:bg-sage-600 transition-colors"
+            >
+              + Dodaj
+            </button>
+          </div>
+
+          {accommodationLoading ? (
+            <p className="text-gray-400 text-sm py-8 text-center">Nalagam...</p>
+          ) : accommodations.length === 0 ? (
+            <p className="text-gray-400 text-sm py-8 text-center">
+              Ni še nobene nastanitve. Kliknite &ldquo;+ Dodaj&rdquo; za začetek.
+            </p>
+          ) : (
+            <div className="space-y-4">
+              {accommodations.map((acc) => (
+                <div
+                  key={acc.id}
+                  className="p-4 bg-cream-50 rounded-lg border border-cream-200 space-y-3"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 space-y-3">
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">
+                          Nastanitev (npr. &ldquo;Glamping šotor 1&rdquo;, &ldquo;Soba 3&rdquo;)
+                        </label>
+                        <input
+                          type="text"
+                          value={acc.unit_name}
+                          onChange={(e) =>
+                            updateAccommodation(acc.id, "unit_name", e.target.value)
+                          }
+                          className="w-full px-3 py-2 border border-cream-300 rounded-lg text-sm
+                                     focus:outline-none focus:ring-2 focus:ring-sage-300"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">
+                          Gostje (imena, ločena z vejico)
+                        </label>
+                        <textarea
+                          value={acc.guest_names}
+                          onChange={(e) =>
+                            updateAccommodation(acc.id, "guest_names", e.target.value)
+                          }
+                          rows={2}
+                          placeholder="npr. Ana Novak, Janez Novak, Petra Horvat"
+                          className="w-full px-3 py-2 border border-cream-300 rounded-lg text-sm
+                                     focus:outline-none focus:ring-2 focus:ring-sage-300 resize-y"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => deleteAccommodation(acc.id)}
+                      className="text-gray-400 hover:text-rose-400 transition-colors text-lg leading-none mt-6"
+                      title="Izbriši"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       )}
 
       {tab === "rsvp" && (

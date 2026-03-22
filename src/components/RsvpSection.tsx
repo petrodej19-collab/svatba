@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const STORAGE_KEY = "rsvp_submitted";
 
 const inputClass =
   "w-full px-4 py-3 bg-white border border-warm-300 rounded-lg text-warm-800 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-sage-300/50 focus:border-sage-300 transition-all text-sm";
@@ -14,8 +16,6 @@ export function RsvpSection() {
     last_name: "",
     email: "",
     attending: "da",
-    meat_menu: "0",
-    vegetarian_menu: "0",
     accommodation_needed: false,
     accommodation_guests: "1",
     message: "",
@@ -23,6 +23,12 @@ export function RsvpSection() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (localStorage.getItem(STORAGE_KEY) === "true") {
+      setSubmitted(true);
+    }
+  }, []);
 
   function update(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -42,6 +48,7 @@ export function RsvpSection() {
 
       if (res.ok) {
         setSubmitted(true);
+        localStorage.setItem(STORAGE_KEY, "true");
       } else {
         const data = await res.json();
         setError(data.error || "Prišlo je do napake.");
@@ -103,34 +110,6 @@ export function RsvpSection() {
         >
           <option value="da">Pridem</option>
           <option value="ne">Ne morem priti</option>
-          <option value="mogoce">Še ne vem</option>
-        </select>
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-4">
-        <select
-          value={form.meat_menu}
-          onChange={(e) => update("meat_menu", e.target.value)}
-          className={selectClass}
-        >
-          <option value="0">Mesni meni — 0</option>
-          <option value="1">Mesni meni — 1</option>
-          <option value="2">Mesni meni — 2</option>
-          <option value="3">Mesni meni — 3</option>
-          <option value="4">Mesni meni — 4</option>
-          <option value="5">Mesni meni — 5</option>
-        </select>
-        <select
-          value={form.vegetarian_menu}
-          onChange={(e) => update("vegetarian_menu", e.target.value)}
-          className={selectClass}
-        >
-          <option value="0">Vegetarijanski meni — 0</option>
-          <option value="1">Vegetarijanski meni — 1</option>
-          <option value="2">Vegetarijanski meni — 2</option>
-          <option value="3">Vegetarijanski meni — 3</option>
-          <option value="4">Vegetarijanski meni — 4</option>
-          <option value="5">Vegetarijanski meni — 5</option>
         </select>
       </div>
 

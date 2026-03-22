@@ -4,13 +4,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { SECTIONS, ROUTES } from "@/lib/constants";
+import { createClient } from "@/lib/supabase/client";
 
-const NAV_LINKS = [
+interface NavLink {
+  href: string;
+  label: string;
+  enabledKey?: string; // if set, only show when site_content[enabledKey] !== "false"
+}
+
+const NAV_LINKS: NavLink[] = [
   { href: SECTIONS.HERO, label: "Domov" },
-  { href: SECTIONS.INFO, label: "Podrobnosti" },
-  { href: SECTIONS.SONGS, label: "Glasba" },
-  { href: SECTIONS.SEATING, label: "Sedežni red" },
-  { href: SECTIONS.RSVP, label: "Potrditev" },
+  { href: SECTIONS.INFO, label: "Podrobnosti", enabledKey: "section_enabled_info" },
+  { href: SECTIONS.SONGS, label: "Glasba", enabledKey: "section_enabled_songs" },
+  { href: SECTIONS.SEATING, label: "Sedežni red", enabledKey: "section_enabled_seating" },
+  { href: SECTIONS.ACCOMMODATION, label: "Nastanitev", enabledKey: "section_enabled_accommodation" },
+  { href: SECTIONS.RSVP, label: "Potrditev", enabledKey: "section_enabled_rsvp" },
 ];
 
 export function Navbar() {
@@ -18,6 +26,26 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>(SECTIONS.HERO);
   const [scrolled, setScrolled] = useState(false);
+  const [disabledKeys, setDisabledKeys] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from("site_content")
+      .select("key, value")
+      .like("key", "section_enabled_%")
+      .then(({ data }) => {
+        const disabled = new Set<string>();
+        (data || []).forEach((row: { key: string; value: string }) => {
+          if (row.value === "false") disabled.add(row.key);
+        });
+        setDisabledKeys(disabled);
+      });
+  }, []);
+
+  const visibleLinks = NAV_LINKS.filter(
+    (link) => !link.enabledKey || !disabledKeys.has(link.enabledKey)
+  );
 
   const isOnHero = activeSection === SECTIONS.HERO && !scrolled;
 
@@ -77,7 +105,7 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden sm:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
+            {visibleLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -138,7 +166,7 @@ export function Navbar() {
               isOnHero ? "border-white/10" : "border-warm-200"
             }`}
           >
-            {NAV_LINKS.map((link) => (
+            {visibleLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}

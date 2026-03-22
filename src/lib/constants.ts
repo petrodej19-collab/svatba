@@ -11,6 +11,7 @@ export const SECTIONS = {
   SONGS: "#glasba",
   SEATING: "#sedezni-red",
   RSVP: "#potrditev",
+  ACCOMMODATION: "#nastanitev",
 } as const;
 
 export const COOKIE_NAME = "guest_authenticated";

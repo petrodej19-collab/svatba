@@ -34,6 +34,14 @@ export interface SiteContent {
   updated_at: string;
 }
 
+export interface Accommodation {
+  id: string;
+  unit_name: string;
+  guest_names: string;
+  sort_order: number;
+  created_at: string;
+}
+
 export interface Rsvp {
   id: string;
   first_name: string;
