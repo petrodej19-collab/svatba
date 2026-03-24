@@ -58,6 +58,14 @@ export default async function HomePage() {
         id="domov"
         className="min-h-screen flex flex-col items-center justify-center px-4 py-24 bg-warm-900 relative overflow-hidden"
       >
+        {/* Floral border decorations — positioned around edges */}
+        <img
+          src="/images/2.svg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none scale-125"
+          aria-hidden="true"
+        />
+
         {/* Subtle vignette */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
 
@@ -74,20 +82,24 @@ export default async function HomePage() {
           </div>
 
           {/* Names */}
-          <div className="space-y-4 animate-fade-in-delay-1">
-            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl text-white/95 tracking-wide">
-              Sara & Bor
+          <div className="space-y-1 animate-fade-in-delay-1 flex flex-col items-center">
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl tracking-[0.35em] uppercase font-light pl-[0.35em]" style={{ color: '#5b5b5b' }}>
+              Sara
             </h1>
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-12 sm:w-20 h-px bg-gradient-to-r from-transparent to-gold-400/60" />
-              <span className="text-gold-400/80 text-sm animate-heartbeat">&#9829;</span>
-              <div className="w-12 sm:w-20 h-px bg-gradient-to-l from-transparent to-gold-400/60" />
-            </div>
+            <p className="font-serif text-lg sm:text-xl italic" style={{ color: '#c08562' }}>in</p>
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl tracking-[0.35em] uppercase font-light pl-[0.35em]" style={{ color: '#5b5b5b' }}>
+              Bor
+            </h1>
           </div>
 
+          {/* Subtitle */}
+          <p className="text-xs sm:text-sm tracking-[0.35em] uppercase animate-fade-in-delay-2" style={{ color: '#5b5b5b' }}>
+            Vabiva na najino poroko
+          </p>
+
           {/* Date */}
-          <p className="font-serif text-xl sm:text-2xl text-white/50 tracking-wider animate-fade-in-delay-2">
-            5. junij 2026
+          <p className="font-serif text-3xl sm:text-4xl md:text-5xl tracking-[0.3em] uppercase font-light animate-fade-in-delay-2" style={{ color: '#bfb499' }}>
+            Petek, 5.6.2026
           </p>
 
           {/* Countdown */}

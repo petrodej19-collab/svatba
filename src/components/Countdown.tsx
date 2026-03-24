@@ -47,9 +47,9 @@ export function Countdown() {
   ];
 
   return (
-    <div className="flex justify-center items-center gap-6 sm:gap-8">
+    <div className="flex justify-center items-center gap-3 sm:gap-5">
       {blocks.map((block, i) => (
-        <div key={block.label} className="flex items-center gap-6 sm:gap-8">
+        <div key={block.label} className="flex items-center gap-3 sm:gap-5">
           <div className="text-center min-w-[3rem]">
             <span className="block font-serif text-3xl sm:text-4xl text-white/90 tabular-nums">
               {String(block.value).padStart(2, "0")}
