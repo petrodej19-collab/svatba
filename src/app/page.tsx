@@ -62,7 +62,7 @@ export default async function HomePage() {
         <img
           src="/images/2.svg"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none scale-125"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none scale-110"
           aria-hidden="true"
         />
 
