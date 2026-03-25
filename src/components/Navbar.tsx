@@ -48,7 +48,6 @@ export function Navbar() {
     (link) => !link.enabledKey || !disabledKeys.has(link.enabledKey)
   );
 
-  const isOnHero = activeSection === SECTIONS.HERO && !scrolled;
 
   useEffect(() => {
     const sectionIds = Object.values(SECTIONS).map((s) => s.replace("#", ""));
