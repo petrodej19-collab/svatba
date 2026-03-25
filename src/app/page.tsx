@@ -58,14 +58,6 @@ export default async function HomePage() {
         id="domov"
         className="min-h-screen flex flex-col items-center justify-center px-4 py-24 bg-warm-900 relative overflow-hidden"
       >
-        {/* Floral border decorations — positioned around edges */}
-        <img
-          src="/images/2.svg"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none scale-110"
-          aria-hidden="true"
-        />
-
         {/* Subtle vignette */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
 

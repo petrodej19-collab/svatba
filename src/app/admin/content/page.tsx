@@ -15,16 +15,21 @@ interface ContentField {
 }
 
 const FIELDS: ContentField[] = [
-  { key: "date_time", label: "Datum in ura", placeholder: "npr. 5. junij 2026 ob 15:00" },
-  { key: "venue_name", label: "Ime lokacije", placeholder: "npr. Grad Otočec" },
-  { key: "venue_address", label: "Naslov lokacije", placeholder: "npr. Grajska cesta 2, 8222 Otočec" },
-  { key: "directions", label: "Navodila za pot", placeholder: "Kako pridete do lokacije...", multiline: true },
-  { key: "schedule_ceremony", label: "Ura — Obred", placeholder: "npr. 15:00" },
-  { key: "schedule_aperitif", label: "Ura — Aperitiv", placeholder: "npr. 16:00" },
-  { key: "schedule_dinner", label: "Ura — Večerja", placeholder: "npr. 18:00" },
-  { key: "schedule_party", label: "Ura — Zabava in ples", placeholder: "npr. 20:00" },
-  { key: "dress_code", label: "Oblačilni kod", placeholder: "npr. Elegantno", multiline: true },
-  { key: "accommodation", label: "Namestitev", placeholder: "Predlogi za prenočišče...", multiline: true },
+  { key: "timeline_1_time", label: "Dogodek 1 — Ura", placeholder: "npr. 12.00" },
+  { key: "timeline_1_title", label: "Dogodek 1 — Naslov", placeholder: "npr. Zbor pri nevesti" },
+  { key: "timeline_1_subtitle", label: "Dogodek 1 — Podnaslov", placeholder: "npr. v Dobrepolju" },
+  { key: "timeline_1_address", label: "Dogodek 1 — Naslov lokacije", placeholder: "npr. Mala vas 17, Dobrepolje" },
+  { key: "timeline_1_map_url", label: "Dogodek 1 — Povezava do zemljevida", placeholder: "https://maps.app.goo.gl/..." },
+  { key: "timeline_2_time", label: "Dogodek 2 — Ura", placeholder: "npr. 15.30" },
+  { key: "timeline_2_title", label: "Dogodek 2 — Naslov", placeholder: "npr. Poroka v cerkvi" },
+  { key: "timeline_2_subtitle", label: "Dogodek 2 — Podnaslov", placeholder: "npr. Sv. Primoža in Felicijana na Jamniku" },
+  { key: "timeline_2_address", label: "Dogodek 2 — Naslov lokacije", placeholder: "npr. Jamnik, Kranj" },
+  { key: "timeline_2_map_url", label: "Dogodek 2 — Povezava do zemljevida", placeholder: "https://maps.app.goo.gl/..." },
+  { key: "timeline_3_time", label: "Dogodek 3 — Ura", placeholder: "npr. 18.00" },
+  { key: "timeline_3_title", label: "Dogodek 3 — Naslov", placeholder: "npr. Pogostitev in zabava" },
+  { key: "timeline_3_subtitle", label: "Dogodek 3 — Podnaslov", placeholder: "npr. na ranču Mackadam" },
+  { key: "timeline_3_address", label: "Dogodek 3 — Naslov lokacije", placeholder: "npr. Spodnje Duplje 1k" },
+  { key: "timeline_3_map_url", label: "Dogodek 3 — Povezava do zemljevida", placeholder: "https://maps.app.goo.gl/..." },
 ];
 
 interface SectionConfig {
@@ -42,20 +47,6 @@ const SECTIONS: SectionConfig[] = [
   { id: "nastanitev", defaultLabel: "Nastanitev", nameKey: "section_name_accommodation", enabledKey: "section_enabled_accommodation" },
 ];
 
-interface InfoBlockConfig {
-  enabledKey: string;
-  titleKey: string;
-  defaultTitle: string;
-}
-
-const INFO_BLOCKS: InfoBlockConfig[] = [
-  { enabledKey: "section_enabled_block_when", titleKey: "block_when_title", defaultTitle: "Kdaj" },
-  { enabledKey: "section_enabled_block_where", titleKey: "block_where_title", defaultTitle: "Kje" },
-  { enabledKey: "section_enabled_block_directions", titleKey: "block_directions_title", defaultTitle: "Kako do tja" },
-  { enabledKey: "section_enabled_block_schedule", titleKey: "block_schedule_title", defaultTitle: "Program" },
-  { enabledKey: "section_enabled_block_dresscode", titleKey: "block_dresscode_title", defaultTitle: "Oblačilni kod" },
-  { enabledKey: "section_enabled_block_accommodation", titleKey: "block_accommodation_title", defaultTitle: "Namestitev" },
-];
 
 type Tab = "vsebina" | "rsvp" | "seating" | "nastanitev";
 
@@ -473,41 +464,6 @@ export default function AdminContentPage() {
                 />
                 {uploading && <p className="text-sm text-sage-500">Nalagam...</p>}
               </div>
-            </div>
-          </div>
-
-          {/* Info block toggles */}
-          <div className="bg-white rounded-xl border border-cream-200 p-6 mb-8">
-            <h2 className="font-serif text-xl text-sage-700 mb-4">Časovnica — prikaz in imena</h2>
-            <p className="text-sm text-gray-500 mb-4">Vklopite ali izklopite posamezne bloke v razdelku Časovnica in jih preimenujte.</p>
-            <div className="space-y-3">
-              {INFO_BLOCKS.map((block) => {
-                const enabled = values[block.enabledKey] !== "false";
-                return (
-                  <div key={block.enabledKey} className="flex items-center gap-3">
-                    <button
-                      onClick={() => toggleSection(block.enabledKey)}
-                      className={`w-10 h-6 rounded-full relative transition-colors flex-shrink-0 ${
-                        enabled ? "bg-sage-500" : "bg-gray-300"
-                      }`}
-                    >
-                      <span
-                        className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
-                          enabled ? "left-[18px]" : "left-0.5"
-                        }`}
-                      />
-                    </button>
-                    <input
-                      type="text"
-                      value={values[block.titleKey] || ""}
-                      onChange={(e) => updateField(block.titleKey, e.target.value)}
-                      placeholder={block.defaultTitle}
-                      className="flex-1 px-3 py-1.5 border border-cream-300 rounded-lg text-sm
-                                 focus:outline-none focus:ring-2 focus:ring-sage-300"
-                    />
-                  </div>
-                );
-              })}
             </div>
           </div>
 
