@@ -51,15 +51,15 @@ export function Countdown() {
       {blocks.map((block, i) => (
         <div key={block.label} className="flex items-center gap-3 sm:gap-5">
           <div className="text-center min-w-[3rem]">
-            <span className="block font-serif text-3xl sm:text-4xl text-white/90 tabular-nums">
+            <span className="block font-serif text-3xl sm:text-4xl text-warm-700 tabular-nums">
               {String(block.value).padStart(2, "0")}
             </span>
-            <span className="text-[10px] text-white/30 uppercase tracking-[0.25em]">
+            <span className="text-[10px] text-warm-400 uppercase tracking-[0.25em]">
               {block.label}
             </span>
           </div>
           {i < blocks.length - 1 && (
-            <span className="text-white/15 text-lg font-light select-none">:</span>
+            <span className="text-warm-300 text-lg font-light select-none">:</span>
           )}
         </div>
       ))}

@@ -12,6 +12,7 @@ export const SECTIONS = {
   SEATING: "#sedezni-red",
   RSVP: "#potrditev",
   ACCOMMODATION: "#nastanitev",
+  GALLERY: "#fotogalerija",
 } as const;
 
 export const COOKIE_NAME = "guest_authenticated";

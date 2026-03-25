@@ -19,6 +19,7 @@ const NAV_LINKS: NavLink[] = [
   { href: SECTIONS.SEATING, label: "Sedežni red", enabledKey: "section_enabled_seating" },
   { href: SECTIONS.ACCOMMODATION, label: "Nastanitev", enabledKey: "section_enabled_accommodation" },
   { href: SECTIONS.RSVP, label: "Potrditev", enabledKey: "section_enabled_rsvp" },
+  { href: SECTIONS.GALLERY, label: "Fotogalerija" },
 ];
 
 export function Navbar() {
@@ -84,21 +85,13 @@ export function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-500 ${
-        isOnHero
-          ? "bg-warm-900/80 backdrop-blur-md border-b border-white/5"
-          : "bg-warm-50/90 backdrop-blur-md border-b border-warm-200"
-      }`}
+      className="sticky top-0 z-50 transition-all duration-500 bg-warm-50/90 backdrop-blur-md border-b border-warm-200"
     >
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex items-center justify-between h-14">
           <a
             href={SECTIONS.HERO}
-            className={`font-serif text-lg transition-colors duration-500 ${
-              isOnHero
-                ? "text-white/90 hover:text-white"
-                : "text-warm-800 hover:text-warm-600"
-            }`}
+            className="font-serif text-lg transition-colors duration-500 text-warm-800 hover:text-warm-600"
           >
             S & B
           </a>
@@ -111,12 +104,8 @@ export function Navbar() {
                 href={link.href}
                 className={`text-xs tracking-widest uppercase transition-colors duration-500 ${
                   activeSection === link.href
-                    ? isOnHero
-                      ? "text-white font-medium"
-                      : "text-warm-800 font-medium"
-                    : isOnHero
-                      ? "text-white/50 hover:text-white/80"
-                      : "text-warm-500 hover:text-warm-700"
+                    ? "text-warm-800 font-medium"
+                    : "text-warm-500 hover:text-warm-700"
                 }`}
               >
                 {link.label}
@@ -127,11 +116,7 @@ export function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`sm:hidden p-2 transition-colors duration-500 ${
-              isOnHero
-                ? "text-white/70 hover:text-white"
-                : "text-warm-500 hover:text-warm-700"
-            }`}
+            className="sm:hidden p-2 transition-colors duration-500 text-warm-500 hover:text-warm-700"
             aria-label="Odpri meni"
           >
             <svg
@@ -162,9 +147,7 @@ export function Navbar() {
         {/* Mobile menu */}
         {isOpen && (
           <div
-            className={`sm:hidden pb-4 pt-2 border-t ${
-              isOnHero ? "border-white/10" : "border-warm-200"
-            }`}
+            className="sm:hidden pb-4 pt-2 border-t border-warm-200"
           >
             {visibleLinks.map((link) => (
               <a
@@ -173,12 +156,8 @@ export function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className={`block py-2 text-xs tracking-widest uppercase transition-colors ${
                   activeSection === link.href
-                    ? isOnHero
-                      ? "text-white font-medium"
-                      : "text-warm-800 font-medium"
-                    : isOnHero
-                      ? "text-white/50 hover:text-white/80"
-                      : "text-warm-500 hover:text-warm-700"
+                    ? "text-warm-800 font-medium"
+                    : "text-warm-500 hover:text-warm-700"
                 }`}
               >
                 {link.label}
@@ -187,11 +166,7 @@ export function Navbar() {
             <Link
               href={ROUTES.ADMIN_LOGIN}
               onClick={() => setIsOpen(false)}
-              className={`block py-2 text-xs transition-colors mt-2 pt-3 ${
-                isOnHero
-                  ? "text-white/20 hover:text-white/40 border-t border-white/10"
-                  : "text-warm-400 hover:text-warm-500 border-t border-warm-200"
-              }`}
+              className="block py-2 text-xs transition-colors mt-2 pt-3 text-warm-400 hover:text-warm-500 border-t border-warm-200"
             >
               Admin
             </Link>

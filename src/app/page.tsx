@@ -56,10 +56,10 @@ export default async function HomePage() {
       {/* ───── HERO ───── */}
       <section
         id="domov"
-        className="min-h-screen flex flex-col items-center justify-center px-4 py-24 bg-warm-900 relative overflow-hidden"
+        className="min-h-screen flex flex-col items-center justify-center px-4 py-24 bg-warm-50 relative overflow-hidden"
       >
         {/* Subtle vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-warm-100/50 via-transparent to-warm-100/50 pointer-events-none" />
 
         <div className="relative text-center space-y-10 animate-fade-in max-w-2xl mx-auto">
           {/* Photo */}
@@ -103,7 +103,7 @@ export default async function HomePage() {
           <div className="pt-8 animate-fade-in-delay-3">
             <a
               href="#informacije"
-              className="inline-block text-white/20 hover:text-white/40 transition-colors"
+              className="inline-block text-warm-300 hover:text-warm-500 transition-colors"
             >
               <svg
                 className="w-5 h-5 mx-auto animate-bounce"
@@ -122,8 +122,6 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Smooth transition to light */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-warm-50 to-transparent pointer-events-none" />
       </section>
 
       {/* ───── ČASOVNICA ───── */}
@@ -276,7 +274,7 @@ export default async function HomePage() {
           <SectionHeader
             label="Razporeditev"
             title={sectionName("seating", "Sedežni red")}
-            subtitle="Poiščite svojo mizo za slavje"
+            subtitle="Poiščite svojo mizo"
           />
 
           <FloorPlan tables={tablesWithGuests} mode="view" />
@@ -311,45 +309,56 @@ export default async function HomePage() {
       )}
 
       {/* ───── NASTANITEV ───── */}
-      {sectionEnabled("accommodation") && accommodations.length > 0 && (
+      {sectionEnabled("accommodation") && (
       <section id="nastanitev" className="py-24 sm:py-32 bg-warm-100">
         <div className="max-w-lg mx-auto px-6">
           <SectionHeader
             label="Nastanitev"
             title={sectionName("accommodation", "Prenočišča")}
-            subtitle={<>Nastanitve na ranču <a href="https://www.mackadam.si/nastanitve/" target="_blank" rel="noopener noreferrer" className="underline decoration-warm-400 underline-offset-2 hover:text-warm-700 transition-colors">Mackadam</a></>}
+            subtitle={<>Prenočišča na ranču <a href="https://www.mackadam.si/nastanitve/" target="_blank" rel="noopener noreferrer" className="underline decoration-warm-400 underline-offset-2 hover:text-warm-700 transition-colors">Mackadam</a></>}
           />
 
-          <div className="space-y-4">
-            {accommodations.map((acc) => {
-              const guests = acc.guest_names
-                .split(",")
-                .map((n) => n.trim())
-                .filter(Boolean);
-              return (
-                <div
-                  key={acc.id}
-                  className="bg-white rounded-xl border border-warm-200 p-5"
-                >
-                  <p className="font-serif text-lg text-warm-800 mb-3">
-                    {acc.unit_name}
-                  </p>
-                  {guests.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5">
-                      {guests.map((name, i) => (
-                        <span
-                          key={i}
-                          className="text-xs px-2.5 py-1 bg-warm-100 rounded-full text-warm-600"
-                        >
-                          {name}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          {accommodations.length > 0 ? (
+            <div className="space-y-4">
+              {accommodations.map((acc) => {
+                const guests = acc.guest_names
+                  .split(",")
+                  .map((n) => n.trim())
+                  .filter(Boolean);
+                return (
+                  <div
+                    key={acc.id}
+                    className="bg-white rounded-xl border border-warm-200 p-5"
+                  >
+                    <p className="font-serif text-lg text-warm-800 mb-3">
+                      {acc.unit_name}
+                    </p>
+                    {guests.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5">
+                        {guests.map((name, i) => (
+                          <span
+                            key={i}
+                            className="text-xs px-2.5 py-1 bg-warm-100 rounded-full text-warm-600"
+                          >
+                            {name}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="text-center">
+              <p className="text-warm-600 text-sm leading-relaxed">
+                Prenočišča za goste so že zagotovljena — prosiva le za potrditev.
+              </p>
+              <p className="text-warm-500 text-sm mt-2">
+                Razpored sledi kmalu.
+              </p>
+            </div>
+          )}
         </div>
       </section>
       )}
@@ -372,6 +381,17 @@ export default async function HomePage() {
         </div>
       </section>
       )}
+
+      {/* ───── FOTOGALERIJA ───── */}
+      <section id="fotogalerija" className="py-24 sm:py-32 bg-warm-50">
+        <div className="max-w-2xl mx-auto px-6">
+          <SectionHeader
+            label="Galerija"
+            title="Fotogalerija"
+          />
+          <p className="text-center text-warm-500 text-sm">V nastajanju ...</p>
+        </div>
+      </section>
     </div>
   );
 }

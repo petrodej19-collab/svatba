@@ -15,7 +15,7 @@ export function RsvpSection() {
     first_name: "",
     last_name: "",
     email: "",
-    attending: "da",
+    attending: "nevesta",
     accommodation_needed: false,
     accommodation_guests: "1",
     message: "",
@@ -108,7 +108,8 @@ export function RsvpSection() {
           onChange={(e) => update("attending", e.target.value)}
           className={selectClass}
         >
-          <option value="da">Pridem</option>
+          <option value="nevesta">Pridružim se pri nevesti</option>
+          <option value="cerkev">Pridružim se pri cerkvi</option>
           <option value="ne">Ne morem priti</option>
         </select>
       </div>
@@ -125,7 +126,7 @@ export function RsvpSection() {
             className="w-4 h-4 rounded border-warm-300 text-sage-500
                        focus:ring-sage-300/50 focus:ring-2 accent-sage-500"
           />
-          <span className="text-warm-700 text-sm">Želim prenočitev</span>
+          <span className="text-warm-700 text-sm">Želim prenočiti</span>
         </label>
         {form.accommodation_needed && (
           <div className="flex items-center gap-3 pl-7">
