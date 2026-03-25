@@ -258,7 +258,6 @@ export default function AdminContentPage() {
     const allKeys = [
       ...FIELDS.map((f) => f.key),
       ...SECTIONS.flatMap((s) => [s.nameKey, s.enabledKey]),
-      ...INFO_BLOCKS.flatMap((b) => [b.enabledKey, b.titleKey]),
     ];
 
     const updates = allKeys.map((key) => ({
