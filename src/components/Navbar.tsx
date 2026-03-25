@@ -26,7 +26,6 @@ export function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>(SECTIONS.HERO);
-  const [scrolled, setScrolled] = useState(false);
   const [disabledKeys, setDisabledKeys] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -67,15 +66,8 @@ export function Navbar() {
       if (el) observer.observe(el);
     });
 
-    function handleScroll() {
-      setScrolled(window.scrollY > 100);
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
