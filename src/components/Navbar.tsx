@@ -14,7 +14,7 @@ interface NavLink {
 
 const NAV_LINKS: NavLink[] = [
   { href: SECTIONS.HERO, label: "Domov" },
-  { href: SECTIONS.INFO, label: "Podrobnosti", enabledKey: "section_enabled_info" },
+  { href: SECTIONS.INFO, label: "Časovnica", enabledKey: "section_enabled_info" },
   { href: SECTIONS.SONGS, label: "Glasba", enabledKey: "section_enabled_songs" },
   { href: SECTIONS.SEATING, label: "Sedežni red", enabledKey: "section_enabled_seating" },
   { href: SECTIONS.ACCOMMODATION, label: "Nastanitev", enabledKey: "section_enabled_accommodation" },

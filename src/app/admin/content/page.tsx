@@ -35,7 +35,7 @@ interface SectionConfig {
 }
 
 const SECTIONS: SectionConfig[] = [
-  { id: "informacije", defaultLabel: "Podrobnosti", nameKey: "section_name_info", enabledKey: "section_enabled_info" },
+  { id: "informacije", defaultLabel: "Časovnica", nameKey: "section_name_info", enabledKey: "section_enabled_info" },
   { id: "glasba", defaultLabel: "Glasba", nameKey: "section_name_songs", enabledKey: "section_enabled_songs" },
   { id: "sedezni-red", defaultLabel: "Sedežni red", nameKey: "section_name_seating", enabledKey: "section_enabled_seating" },
   { id: "potrditev", defaultLabel: "Potrditev", nameKey: "section_name_rsvp", enabledKey: "section_enabled_rsvp" },
@@ -478,8 +478,8 @@ export default function AdminContentPage() {
 
           {/* Info block toggles */}
           <div className="bg-white rounded-xl border border-cream-200 p-6 mb-8">
-            <h2 className="font-serif text-xl text-sage-700 mb-4">Podrobnosti — prikaz in imena</h2>
-            <p className="text-sm text-gray-500 mb-4">Vklopite ali izklopite posamezne bloke v razdelku Podrobnosti in jih preimenujte.</p>
+            <h2 className="font-serif text-xl text-sage-700 mb-4">Časovnica — prikaz in imena</h2>
+            <p className="text-sm text-gray-500 mb-4">Vklopite ali izklopite posamezne bloke v razdelku Časovnica in jih preimenujte.</p>
             <div className="space-y-3">
               {INFO_BLOCKS.map((block) => {
                 const enabled = values[block.enabledKey] !== "false";
@@ -513,7 +513,7 @@ export default function AdminContentPage() {
 
           {/* Content fields */}
           <div className="bg-white rounded-xl border border-cream-200 p-6 space-y-6">
-            <h2 className="font-serif text-xl text-sage-700 mb-2">Podrobnosti — vsebina</h2>
+            <h2 className="font-serif text-xl text-sage-700 mb-2">Časovnica — vsebina</h2>
 
             {FIELDS.map((field) => (
               <div key={field.key}>
