@@ -721,18 +721,24 @@ export default function AdminContentPage() {
           ) : (
             <>
               {/* Summary */}
-              <div className="grid grid-cols-3 gap-3 mb-6">
+              <div className="grid grid-cols-4 gap-3 mb-6">
                 <div className="bg-sage-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-serif text-sage-700">
-                    {rsvps.filter((r) => r.attending === "da").length}
+                    {rsvps.filter((r) => r.attending !== "ne").length}
                   </p>
                   <p className="text-xs text-sage-500">Pridejo</p>
                 </div>
                 <div className="bg-cream-100 rounded-lg p-3 text-center">
                   <p className="text-2xl font-serif text-gray-600">
-                    {rsvps.filter((r) => r.attending === "mogoce").length}
+                    {rsvps.filter((r) => r.attending === "nevesta").length}
                   </p>
-                  <p className="text-xs text-gray-500">Morda</p>
+                  <p className="text-xs text-gray-500">Pri nevesti</p>
+                </div>
+                <div className="bg-cream-100 rounded-lg p-3 text-center">
+                  <p className="text-2xl font-serif text-gray-600">
+                    {rsvps.filter((r) => r.attending === "cerkev").length}
+                  </p>
+                  <p className="text-xs text-gray-500">Pri cerkvi</p>
                 </div>
                 <div className="bg-rose-50 rounded-lg p-3 text-center">
                   <p className="text-2xl font-serif text-rose-500">
@@ -781,18 +787,18 @@ export default function AdminContentPage() {
                         <div className="flex gap-3 mt-1 text-xs text-gray-500">
                           <span
                             className={`px-2 py-0.5 rounded-full ${
-                              rsvp.attending === "da"
-                                ? "bg-sage-100 text-sage-600"
-                                : rsvp.attending === "ne"
+                              rsvp.attending === "ne"
                                 ? "bg-rose-100 text-rose-500"
-                                : "bg-cream-200 text-gray-600"
+                                : "bg-sage-100 text-sage-600"
                             }`}
                           >
-                            {rsvp.attending === "da"
-                              ? "Pridem"
+                            {rsvp.attending === "nevesta"
+                              ? "Pri nevesti"
+                              : rsvp.attending === "cerkev"
+                              ? "Pri cerkvi"
                               : rsvp.attending === "ne"
                               ? "Ne pridem"
-                              : "Mogoče"}
+                              : "Pridem"}
                           </span>
                           {rsvp.meat_menu > 0 && (
                             <span>Mesni: {rsvp.meat_menu}</span>
